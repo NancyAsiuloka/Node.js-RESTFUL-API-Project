@@ -10,6 +10,8 @@ app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
+app.use();
+
 // Routes which should handle request
 app.use('/products', productRoutes);
 app.use('/orders', orderRoutes);
