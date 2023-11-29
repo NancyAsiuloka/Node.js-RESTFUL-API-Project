@@ -22,6 +22,7 @@ app.use((req, res, next) => {
   }
 });
 
+
 // Routes which should handle request
 app.use("/products", productRoutes);
 app.use("/orders", orderRoutes);
