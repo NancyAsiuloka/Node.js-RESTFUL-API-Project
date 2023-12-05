@@ -35,7 +35,10 @@ router.get("/:productId", (req, res, next) => {
     console.log(doc);
     res.status(200).json(doc);
   })
-  .catch(err => console.log(err));
+  .catch(err => {
+      console.log(err)
+      res.status(500).json({error: err});
+    });
 });
 
 router.patch("/:productId", (req, res, next) => {
