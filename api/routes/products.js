@@ -16,7 +16,10 @@ router.post("/", (req, res, next) => {
     name: req.body.name,
     price: req.body.price
   });
-  products.save();
+  products.save().then(result => {
+    console.log(result)
+  })
+  .catch(err => console.log(err));
 
   res.status(201).json({
     message: "Handling POST requests to /products",
@@ -26,17 +29,12 @@ router.post("/", (req, res, next) => {
 
 router.get("/:productId", (req, res, next) => {
   const id = req.params.productId;
-
-  if (id === "special") {
-    res.status(200).json({
-      message: "You discovered the special ID",
-      id: id
-    });
-  } else {
-    res.status(200).json({
-        message: 'You passed an ID'
-    })
-  }
+  Product.findById(id)
+  .exec()
+  .then(doc => {
+    console.log(doc)
+  })
+  .catch(err => console.log(err));
 });
 
 router.patch("/:productId", (req, res, next) => {
