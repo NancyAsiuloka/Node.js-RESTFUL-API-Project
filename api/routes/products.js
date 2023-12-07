@@ -11,12 +11,12 @@ router.get("/", (req, res, next) => {
 });
 
 router.post("/", (req, res, next) => {
-
   const products = new Product({
     _id: new mongoose.Types.ObjectId(),
     name: req.body.name,
     price: req.body.price
   });
+  products.save();
 
   res.status(201).json({
     message: "Handling POST requests to /products",
