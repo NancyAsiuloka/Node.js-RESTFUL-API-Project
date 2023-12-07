@@ -8,14 +8,15 @@ const productRoutes = require("./api/routes/products");
 const orderRoutes = require("./api/routes/orders");
 
 mongoose.connect(
-  "mongodb+srv://Asiuloka:node123@cluster7.gzecte7.mongodb.net/?retryWrites=true&w=majority",
+  "mongodb+srv://Asiuloka:" +
+  process.env.MONGO_ATLAS_PW + "@cluster7.gzecte7.mongodb.net/?retryWrites=true&w=majority",
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   }
 );
 
-mongoose.set("useCreateIndex", true); // Set useCreateIndex directly on Mongoose
+// mongoose.set("useCreateIndex", true); // Set useCreateIndex directly on Mongoose
 
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
