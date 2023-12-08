@@ -73,11 +73,19 @@ router.post("/", (req, res, next) => {
 router.get("/:productId", (req, res, next) => {
   const id = req.params.productId;
   Product.findById(id)
+    .select('name price _id')
     .exec()
     .then((doc) => {
       console.log(doc);
       if (doc) {
-        res.status(200).json(doc);
+        res.status(200).json({
+          product: doc,
+          request: {
+            type: "GET",
+            description: "Get all products",
+            url: "http://localhost:3000/products"
+          }
+        });
       } else {
         res.status(404).json({
           message: "No valid entry found for provided ID",
@@ -100,7 +108,13 @@ router.patch("/:productId", (req, res, next) => {
   Product.update({ _id: id }, { $set: updateOps })
   .exec()
     .then((result) => {
-      res.status(200).json(result);
+      res.status(200).json({
+        message: 'Product Updated',
+        request: {
+          type: 'GET',
+          url: 'htt'
+        }
+      });
     })
     .catch((err) => {
       console.log(err);
