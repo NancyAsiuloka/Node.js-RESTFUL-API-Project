@@ -16,7 +16,7 @@ mongoose.connect(
   }
 );
 
-// mongoose.set("useCreateIndex", true); // Set useCreateIndex directly on Mongoose
+// mongoose.Promise = global.Promise;
 
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
