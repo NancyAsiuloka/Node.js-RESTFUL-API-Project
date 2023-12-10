@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const mongoose = require('mongoose');
+const Order = require('../models/order')
 
 // Handle incoming GET request to /orders
 router.get('/', (req, res, next) => {
@@ -9,10 +11,7 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-    const order = {
-        productId: req.body.productId,
-        quantity: req.body.quantity,
-    };
+    const order = new Order();
 
     res.status(201).json({
         message: 'Orders was created',
