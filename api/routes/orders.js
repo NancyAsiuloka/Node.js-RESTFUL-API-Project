@@ -12,8 +12,9 @@ router.get('/', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
     const order = new Order({
-        _id: mongoose.Types.ObjectId();
-        quantity: req.body.quantity
+        _id: mongoose.Types.ObjectId(),
+        quantity: req.body.quantity,
+        product: req.body.productId,
     });
 
     res.status(201).json({
