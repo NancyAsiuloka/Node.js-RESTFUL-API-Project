@@ -11,7 +11,10 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-    const order = new Order();
+    const order = new Order({
+        _id: mongoose.Types.ObjectId();
+        quantity: req.body.quantity
+    });
 
     res.status(201).json({
         message: 'Orders was created',
