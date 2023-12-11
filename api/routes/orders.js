@@ -25,12 +25,6 @@ router.post('/', (req, res, next) => {
         res.status(500).json({
             error: err
         })
-
-    })
-
-    res.status(201).json({
-        message: 'Orders was created',
-        order: order
     })
 });
 
