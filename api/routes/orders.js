@@ -16,6 +16,17 @@ router.post('/', (req, res, next) => {
         quantity: req.body.quantity,
         product: req.body.productId,
     });
+    order.save().exec().then(result => {
+        console.log(result)
+        res.status(201).json(result)
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({
+            error: err
+        })
+
+    })
 
     res.status(201).json({
         message: 'Orders was created',
