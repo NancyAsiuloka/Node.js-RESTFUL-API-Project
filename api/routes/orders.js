@@ -5,8 +5,13 @@ const Order = require('../models/order')
 
 // Handle incoming GET request to /orders
 router.get('/', (req, res, next) => {
-    res.status(200).json({
-        message: 'Orders were fetched'
+    Order.find().exec().then(docs => {
+        res.status(200).json(docs)
+    })
+    .catch(err => {
+        res.status(500).json({
+            error: err
+        })
     })
 });
 
@@ -16,7 +21,7 @@ router.post('/', (req, res, next) => {
         quantity: req.body.quantity,
         product: req.body.productId,
     });
-    order.save().exec().then(result => {
+    order.save().then(result => {
         console.log(result)
         res.status(201).json(result)
     })
