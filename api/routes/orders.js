@@ -34,6 +34,7 @@ router.get("/", (req, res, next) => {
     });
 });
 
+
 router.post("/", (req, res, next) => {
   Product.findById(req.body.productId).then((product) => {
     if (!product) {
