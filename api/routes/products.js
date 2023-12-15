@@ -13,43 +13,43 @@ const fs = require('fs')
 // }
 // });
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    const uploadPath = "./uploads/";
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     const uploadPath = "./uploads/";
 
-    // Create the 'uploads' directory if it doesn't exist
-    fs.mkdir(uploadPath, { recursive: true }, (err) => {
-      if (err) {
-        console.error("Error creating 'uploads' directory:", err);
-      } else {
-        cb(null, uploadPath);
-      }
-    });
-  },
-  filename: (req, file, cb) => {
-    cb(null, new Date().toISOString() + file.originalname);
-  }
-});
+//     // Create the 'uploads' directory if it doesn't exist
+//     fs.mkdir(uploadPath, { recursive: true }, (err) => {
+//       if (err) {
+//         console.error("Error creating 'uploads' directory:", err);
+//       } else {
+//         cb(null, uploadPath);
+//       }
+//     });
+//   },
+//   filename: (req, file, cb) => {
+//     cb(null, new Date().toISOString() + file.originalname);
+//   }
+// });
 
 
-const fileFilter = (req, file, cb) => {
-  // reject a file
-  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
-    cb(null, true);
-  } else {
-    cb(null, false);
-  }
-}
+// const fileFilter = (req, file, cb) => {
+//   // reject a file
+//   if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+//     cb(null, true);
+//   } else {
+//     cb(null, false);
+//   }
+// }
 
-const upload = multer({
-  storage: storage,
-  limits: {
-  fileSize: 1024 * 1024 * 8
-  },
-  fileFilter: fileFilter
-})
+// const upload = multer({
+//   storage: storage,
+//   limits: {
+//   fileSize: 1024 * 1024 * 8
+//   },
+//   fileFilter: fileFilter
+// })
 
-// const upload = multer({dest: 'uploads/'})
+const upload = multer({dest: 'uploads/'})
 
 
 const Product = require("../models/product.js");
@@ -91,6 +91,7 @@ router.get("/", (req, res, next) => {
 });
 
 router.post("/", upload.single('productImage'),(req, res, next) => {
+  console.log(req.body);
   console.log(req.file);
   const products = new Product({
     _id: new mongoose.Types.ObjectId(),
