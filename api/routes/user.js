@@ -54,12 +54,17 @@ router.post('/login', async (req, res, next) => {
                 })
             }
             if(result){
-                jwt.sign({
+                const token = jwt.sign({
                     email: user[0].email,
                     userId: user[0]._id
-                })
+                }, process.env.JWT_KEY,
+                {
+                    expiresIn: "1hr"
+                }
+                );
                 return res.status(200).json({
-                    message: 'Auth successful'
+                    message: 'Auth successful',
+                    token: token
                 })
             }
             res.status(401).json({
