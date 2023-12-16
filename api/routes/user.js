@@ -39,6 +39,25 @@ router.post('/signup', async (req, res, next) => {
 
 router.post('/login', async (req, res, next) => {
     User.find({email: req.body.email})
+    .exec()
+    .then(user => {
+        if(user.length < 1){
+            return res.status(401).json({
+                type: 'not-found',
+                message: 'Email not found.'}).end();
+        }
+        // compare passwords - is this correct?
+        bcrypt.compare(req.body.password, user[0].password, (err, res) =>{
+
+        })
+
+    })
+    .catch (err => {
+        console.error(err);
+        res.status(500).json({
+            error: err
+        });
+    })
 })
 
 router.delete('/:userId', async (req, res, next) => {
