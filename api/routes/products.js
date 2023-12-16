@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const multer = require('multer')
-const fs = require('fs')
 
 // const storage = multer.diskStorage({
 //   destination: (req, file, cb) => {
@@ -12,25 +11,6 @@ const fs = require('fs')
 //     cb(null, new Date().toISOString() + file.originalname);
 // }
 // });
-
-// const storage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     const uploadPath = "./uploads/";
-
-//     // Create the 'uploads' directory if it doesn't exist
-//     fs.mkdir(uploadPath, { recursive: true }, (err) => {
-//       if (err) {
-//         console.error("Error creating 'uploads' directory:", err);
-//       } else {
-//         cb(null, uploadPath);
-//       }
-//     });
-//   },
-//   filename: (req, file, cb) => {
-//     cb(null, new Date().toISOString() + file.originalname);
-//   }
-// });
-
 
 // const fileFilter = (req, file, cb) => {
 //   // reject a file
