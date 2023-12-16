@@ -57,6 +57,9 @@ router.post('/login', async (req, res, next) => {
                     message: 'Auth successful'
                 })
             }
+            res.status(401).json({
+                message: 'Auth failed'
+            })
         })
 
     })
