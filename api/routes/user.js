@@ -37,6 +37,10 @@ router.post('/signup', async (req, res, next) => {
     }
 });
 
+router.post('/login', async (req, res, next) => {
+    User.find({email: req.body.email})
+})
+
 router.delete('/:userId', async (req, res, next) => {
     try {
         const result = await User.deleteOne({ _id: req.params.userId }).exec();
