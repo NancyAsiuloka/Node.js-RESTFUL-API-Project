@@ -43,12 +43,20 @@ router.post('/login', async (req, res, next) => {
     .then(user => {
         if(user.length < 1){
             return res.status(401).json({
-                type: 'not-found',
-                message: 'Email not found.'}).end();
+                message: 'Auth failed'});
         }
         // compare passwords - is this correct?
-        bcrypt.compare(req.body.password, user[0].password, (err, res) =>{
-
+        bcrypt.compare(req.body.password, user[0].password, (err, result) =>{
+            if(err) {
+                return res.status(401).json({
+                    message: "Auth failed"
+                })
+            }
+            if(result){
+                return res.status(200).json({
+                    message: 'Auth successful'
+                })
+            }
         })
 
     })
