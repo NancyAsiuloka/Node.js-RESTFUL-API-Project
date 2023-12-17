@@ -1,13 +1,16 @@
-const jwt =  require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
 
 module.exports = (req, res, next) => {
-    try{
-    const decoded = jwt.verify(req.body.token, process.env.JWT_KEY);
-    req.userData = decoded;
-    next();
-    } catch {
+    try {
+        const token = req.headers.authorization.split(' ')[1];
+        const decoded = jwt.verify(token, process.env.JWT_KEY);
+        req.userData = decoded;
+        next();
+    } catch (error) {
+        console.error('JWT Verification Error:', error.message);
         return res.status(401).json({
-            message: 'Token is not valid'
-        })
+            message: 'Token is not valid',
+            error: error.message
+        });
     }
-}
+};
