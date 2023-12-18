@@ -3,7 +3,6 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const Order = require("../models/order");
 const Product = require("../models/product");
-const product = require("../models/product");
 const checkAuth = require('../middleware/check-auth')
 
 // Handle incoming GET request to /orders
